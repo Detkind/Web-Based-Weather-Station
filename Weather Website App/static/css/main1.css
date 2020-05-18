@@ -1,0 +1,782 @@
+:root {
+  --primary-color: #CD735F;
+  --text-color: #707070;
+  --text-bookmark-color-hover: #EBEBEB;
+  --secondary-text-color: #303030;
+  --bg-color: #EBEBEB;
+  --secondary-bg-color: #FFFFFF;
+  --filter-bookmark: grayscale(1) invert(1);
+  --filter: none;
+  --shadow: #707070;
+  --shadow-dropdown: #7070703d;
+  --slide-circle: #303030;
+  --toggle-color: #CD735F;
+}
+
+[data-theme="dark"] {
+  --primary-color: rgb(94, 57, 49);
+  --text-color: #EBEBEB;
+  --secondary-text-color: #FFFFFF;
+  --bg-color: #252525;
+  --secondary-bg-color: #303030;
+  --filter-bookmark: grayscale(1) invert(1);
+  --filter: grayscale(1) invert(1);
+  --shadow: rgb(20, 20, 20);
+  --shadow-dropdown:rgba(20, 20, 20, 0.5);
+  --slide-circle: #FFFFFF;
+  --toggle-color: rgb(94, 57, 49);
+}
+
+header {
+  position: absolute;
+  padding: 1em;
+  z-index: 20;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: calc(100% - 2em);
+  height: 25px;
+  background-color: var(--secondary-bg-color);
+  -webkit-box-shadow: 0px 1px 10px var(--shadow);
+          box-shadow: 0px 1px 10px var(--shadow);
+}
+
+header .user img {
+  float: right;
+  -webkit-filter: var(--filter);
+          filter: var(--filter);
+}
+
+header .user a.logo {
+  font-size: 20px;
+  margin-right: 5px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+}
+
+header .user .userDropbtn {
+  z-index: 50;
+  height: 15px;
+  width: 15px;
+  border: none;
+  outline: none;
+  background: transparent;
+  -webkit-transform: translateX(3px);
+          transform: translateX(3px);
+}
+
+header .user .userDropbtn img {
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  -webkit-filter: var(--filter);
+          filter: var(--filter);
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
+
+body {
+  display: inline-block;
+  background: var(--bg-color);
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  color: var(--secondary-text-color);
+}
+
+.f1 .location {
+  height: 40px;
+  width: 800px;
+  -webkit-transform: translateY(-120px);
+          transform: translateY(-120px);
+}
+
+.f1 .location img {
+  float: left;
+  position: relative;
+  height: 38px;
+  width: 38px;
+  padding-left: 1em;
+  -webkit-filter: var(--filter);
+          filter: var(--filter);
+}
+
+.f1 .location p {
+  position: relative;
+  font-size: 2rem;
+  padding-left: 10px;
+  width: 250px;
+}
+
+.f1 .location button {
+  position: absolute;
+  -webkit-transform: translateY(-30px);
+          transform: translateY(-30px);
+  left: 50px;
+  outline: none;
+  border: none;
+  background: transparent;
+  font-size: 0.6em;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+}
+
+.f1 .current-weather p {
+  position: relative;
+  font-size: 1.5rem;
+  padding-left: 20px;
+  -webkit-transform: translate(6px, 85%);
+          transform: translate(6px, 85%);
+}
+
+.f1 .temperature p {
+  position: absolute;
+  font-size: 6rem;
+  -webkit-transform: translateY(-90%);
+          transform: translateY(-90%);
+  padding-left: 20px;
+}
+
+.f1 .v1 {
+  width: 2px;
+  height: 500px;
+  position: absolute;
+  background-color: var(--text-color);
+  -webkit-transform: translate(500px, -25%);
+          transform: translate(500px, -25%);
+}
+
+.f1 .info {
+  position: absolute;
+  font-size: 1.1rem;
+  -webkit-transform: translate(525px, -70%);
+          transform: translate(525px, -70%);
+}
+
+.f1 .info p {
+  color: var(--text-color);
+}
+
+.f1 .info .bold {
+  font-weight: 1000;
+  font-size: 1.3rem;
+}
+
+.f1 .notification-fail {
+  bottom: 50px;
+  -webkit-transform: translateX(-270px);
+          transform: translateX(-270px);
+}
+
+.f1 .notification-success {
+  bottom: 50px;
+  -webkit-transform: translateX(-270px);
+          transform: translateX(-270px);
+}
+
+.fp-slidesNav.fp-bottom {
+  margin-left: 1em !important;
+}
+
+.notification-success {
+  position: absolute;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 800px;
+  height: 20px;
+}
+
+.notification-success p {
+  -webkit-transform: translateY(-18px);
+          transform: translateY(-18px);
+  text-align: center;
+  text-decoration: underline;
+  -webkit-text-decoration-color: green;
+          text-decoration-color: green;
+}
+
+.notification-fail {
+  position: absolute;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 800px;
+  height: 20px;
+}
+
+.notification-fail p {
+  -webkit-transform: translateY(-18px);
+          transform: translateY(-18px);
+  text-align: center;
+  text-decoration: underline;
+  -webkit-text-decoration-color: red;
+          text-decoration-color: red;
+}
+
+.notification-empty {
+  height: 0;
+  width: 0;
+}
+
+.notification-empty p {
+  color: #ffffff00;
+}
+
+.bookmarks_all {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transform: translate(15px, 15px);
+          transform: translate(15px, 15px);
+  height: 360px;
+  width: 770px;
+}
+
+.bookmarks_all .bookmarkWhole {
+  height: 360px;
+  width: 80px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.bookmarks_all .bookmarkWhole .bookmark {
+  height: 300px;
+  width: 80px;
+  background-color: var(--secondary-bg-color);
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 10px var(--shadow);
+          box-shadow: 0px 0px 10px var(--shadow);
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+}
+
+.bookmarks_all .bookmarkWhole .bookmark img {
+  height: 30px;
+  width: 30px;
+  -webkit-transform: translate(5px, 10px);
+          transform: translate(5px, 10px);
+  -webkit-filter: var(--filter);
+          filter: var(--filter);
+}
+
+.bookmarks_all .bookmarkWhole .bookmark p {
+  font-weight: 1000;
+  color: var(--text-color);
+}
+
+.bookmarks_all .bookmarkWhole .bookmark .weatherDescriptionBookmark img {
+  position: absolute;
+  -webkit-transform: translate(38px, -25px);
+          transform: translate(38px, -25px);
+  -webkit-filter: var(--filter);
+          filter: var(--filter);
+}
+
+.bookmarks_all .bookmarkWhole .bookmark a.linkBookmark {
+  position: absolute;
+  -webkit-transform: translate(-2px, -2px);
+          transform: translate(-2px, -2px);
+}
+
+.bookmarks_all .bookmarkWhole .bookmark a.linkBookmark .buttonBookmark {
+  position: absolute;
+  height: 300px;
+  width: 80px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.bookmarks_all .bookmarkWhole .bookmark:hover {
+  background-color: var(--primary-color);
+}
+
+.bookmarks_all .bookmarkWhole .bookmark:hover p {
+  color: var(--text-bookmark-color-hover);
+}
+
+.bookmarks_all .bookmarkWhole .bookmark:hover img {
+  -webkit-filter: var(--filter-bookmark);
+          filter: var(--filter-bookmark);
+}
+
+.bookmarks_all .bookmarkWhole a {
+  position: absolute;
+  height: 0;
+  width: 0;
+  -webkit-transform: translate(28px, 8px);
+          transform: translate(28px, 8px);
+}
+
+.bookmarks_all .bookmarkWhole a .delete {
+  height: 20px;
+  width: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.bookmarks_all .bookmarkWhole a .delete img {
+  -webkit-transform: translate(-2px, 0px);
+          transform: translate(-2px, 0px);
+  height: 15px;
+  width: 15px;
+  -webkit-filter: var(--filter);
+          filter: var(--filter);
+}
+
+.vertical-sentence {
+  -ms-writing-mode: tb-rl;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+}
+
+.rotate-characters-back-to-horizontal {
+  -webkit-text-orientation: upright;
+  text-orientation: upright;
+  -webkit-transform: translate(-5.5px, 10px);
+          transform: translate(-5.5px, 10px);
+}
+
+.temp {
+  position: absolute;
+  bottom: 0;
+  -webkit-transform: translate(23px, -35px);
+          transform: translate(23px, -35px);
+}
+
+.bookmarkActualSize {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 300px;
+  width: 80px;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.addCity {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 25px;
+}
+
+.addCity input {
+  width: 200px;
+  border: none;
+  outline: none;
+  background: none;
+  color: #FFFFFF;
+  font-size: 15px;
+}
+
+.addCity label {
+  position: absolute;
+  width: 200px;
+  height: 1px;
+  pointer-events: none;
+  border-bottom: 1px solid black;
+  bottom: 0;
+  background-color: #FFFFFF;
+}
+
+.addCity button {
+  border: none;
+  outline: none;
+  background: none;
+  color: #FFFFFF;
+  font-size: 15px;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+
+.addCity button:hover {
+  color: var(--primary-color);
+}
+
+.addCityBookmark {
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  bottom: 150px;
+}
+
+.addCityBookmark button {
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  font-size: 100px;
+  line-height: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+}
+
+.addCityBookmark button:hover {
+  color: var(--primary-color);
+}
+
+.overlay {
+  height: 0;
+  width: 800px;
+  position: absolute;
+  top: 50px;
+  z-index: 30;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  z-index: 60;
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #FFFFFF;
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.overlay a:hover {
+  color: var(--primary-color);
+}
+
+.dropdown {
+  height: 0;
+  width: 150px;
+  position: absolute;
+  top: 55px;
+  z-index: 70;
+  background-color: var(--secondary-bg-color);
+  overflow: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-box-shadow: 1px 4px 3px var(--shadow-dropdown);
+          box-shadow: 1px 4px 3px var(--shadow-dropdown);
+}
+
+.dropdown-content {
+  position: absolute;
+  z-index: 80;
+}
+
+.dropdown-content ul {
+  list-style-type: none;
+  left: 0;
+  -webkit-transform: translate(-20px, -5px);
+          transform: translate(-20px, -5px);
+}
+
+.dropdown-content ul li {
+  padding: 5px;
+}
+
+.dropdown-content ul li a {
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+}
+
+.dropdown-content ul li a:hover {
+  color: var(--primary-color);
+}
+
+.dropbtn {
+  -webkit-transform: translate(20px, 15px);
+          transform: translate(20px, 15px);
+  z-index: 50;
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  border: none;
+  outline: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dropbtn img {
+  -webkit-transform: translateX(-5px);
+          transform: translateX(-5px);
+  height: 25px;
+  width: 25px;
+  -webkit-filter: var(--filter);
+          filter: var(--filter);
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
+
+.user-dropdown {
+  height: 0;
+  width: 150px;
+  position: absolute;
+  right: 0;
+  top: 55px;
+  z-index: 70;
+  background-color: var(--secondary-bg-color);
+  overflow: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-box-shadow: -1px 4px 3px var(--shadow-dropdown);
+          box-shadow: -1px 4px 3px var(--shadow-dropdown);
+}
+
+.dropdown-content {
+  position: absolute;
+  z-index: 80;
+}
+
+.dropdown-content ul {
+  list-style-type: none;
+  left: 0;
+  -webkit-transform: translate(-20px, -5px);
+          transform: translate(-20px, -5px);
+}
+
+.dropdown-content ul li {
+  padding: 5px;
+}
+
+.dropdown-content ul li a {
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+}
+
+.dropdown-content ul li a:hover {
+  color: var(--primary-color);
+}
+
+.settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 0;
+  width: 800px;
+  position: absolute;
+  z-index: 100;
+  background-color: var(--secondary-bg-color);
+  overflow: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.settings .saveSettings {
+  position: absolute;
+  bottom: 35px;
+}
+
+.settings .saveSettings button {
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.settings .saveSettings button:hover {
+  color: var(--primary-color);
+}
+
+.settings .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  color: var(--text-color);
+}
+
+.settings a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: var(--secondary-bg-color);
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  z-index: 150;
+}
+
+.settings a:hover {
+  color: var(--primary-color);
+}
+
+.settings .settings-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 25%;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.settings .settings-content .toggle-switch {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 300px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.settings .settings-content .toggle-switch .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.settings .settings-content .toggle-switch .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.settings .settings-content .toggle-switch .switch2 {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.settings .settings-content .toggle-switch .switch2 input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.settings .settings-content .toggle-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.settings .settings-content .toggle-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.settings .settings-content .toggle-switch input:checked + .slider {
+  background-color: var(--toggle-color);
+}
+
+.settings .settings-content .toggle-switch input:focus + .slider {
+  -webkit-box-shadow: 0 0 1px var(--toggle-color);
+          box-shadow: 0 0 1px var(--toggle-color);
+}
+
+.settings .settings-content .toggle-switch input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+          transform: translateX(26px);
+}
+
+.settings .settings-content .toggle-switch .slider.round {
+  border-radius: 34px;
+}
+
+.settings .settings-content .toggle-switch .slider.round:before {
+  border-radius: 50%;
+}
+
+.fp-slidesNav span {
+  background-color: var(--slide-circle) !important;
+}
+/*# sourceMappingURL=main1.css.map */

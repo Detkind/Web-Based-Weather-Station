@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/setCity.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+</head>
+<body>
+    <p class="text">Please select a city to display on main page</p>
+    <div class="setCity">
+        <form method="POST">
+            <label></label>
+            <input type="text" name="city" autocomplete="off" placeholder="City name" required oninvalid="this.setCustomValidity('Please provide city name.')" oninput="this.setCustomValidity('')"/>
+            <button>Select City</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'error' %}
+                    {% set message_class = 'notification-fail' %}
+                {% else %}
+                    {% set message_class = 'notification-empty' %}
+                {% endif %}
+                <div class="{{ message_class }}"><p>{{ message }}</p></div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.notification-fail').fadeOut('slow');
+            }, 10000);
+        });
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.notification-empty').fadeOut('slow');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

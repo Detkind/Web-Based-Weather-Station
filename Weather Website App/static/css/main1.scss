@@ -1,0 +1,776 @@
+// color variables for light mode
+:root {
+    --primary-color: #CD735F;
+    --text-color: #707070;
+    --text-bookmark-color-hover: #EBEBEB;
+    --secondary-text-color: #303030;
+    --bg-color: #EBEBEB;
+    --secondary-bg-color: #FFFFFF;
+    --filter-bookmark: grayscale(1) invert(1);
+    --filter: none;
+    --shadow: #707070;
+    --shadow-dropdown: #7070703d;
+    --slide-circle: #303030;
+    --toggle-color: #CD735F;
+}
+
+// color variables for dark mode
+[data-theme="dark"] {
+    --primary-color: rgb(94, 57, 49);
+    --text-color: #EBEBEB;
+    --secondary-text-color: #FFFFFF;
+    --bg-color: #252525;
+    --secondary-bg-color: #303030;
+    --filter-bookmark: grayscale(1) invert(1);
+    --filter: grayscale(1) invert(1);
+    --shadow: rgb(20, 20, 20);
+    --shadow-dropdown:rgba(20, 20, 20, 0.5);
+    --slide-circle: #FFFFFF;
+    --toggle-color: rgb(94, 57, 49);
+}
+
+// header
+header {
+    position: absolute;
+    padding: 1em;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 2em);
+    height: 25px;
+    background-color: var(--secondary-bg-color);
+    box-shadow: 0px 1px 10px var(--shadow);
+
+    // div user (logo, dropdown button, user image)
+    .user {
+
+        img {
+            float: right;
+            filter: var(--filter);
+        }
+
+        a.logo {
+            font-size: 20px;
+            margin-right: 5px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .userDropbtn {
+            z-index: 50;
+            height: 15px;
+            width: 15px;
+            border: none;
+            outline: none;
+            background: transparent;
+            transform: translateX(3px);
+            
+            img {
+                height: 15px;
+                width: 15px;
+                cursor: pointer;
+                filter: var(--filter);
+                transform: rotate(0deg);
+                transition: transform 0.5s;
+            }
+        
+        }
+        
+    }
+
+}
+
+// body
+body {
+    display: inline-block;
+    background: var(--bg-color);
+}
+
+// paragraph (sets font family and color for all paragraph tags)
+p {
+    font-family: 'Roboto', sans-serif;
+    color: var(--secondary-text-color);
+}
+
+// first slide (home page)
+.f1 {
+
+    // location (marker image, text location, change button)
+    .location {
+        height: 40px;
+        width: 800px;
+        transform: translateY(-120px);
+        
+        img {
+            float: left;
+            position: relative;
+            height: 38px;
+            width: 38px;
+            padding-left: 1em;
+            filter: var(--filter);
+        }
+
+        p {
+            position: relative;
+            font-size: 2rem;
+            padding-left: 10px;
+            width: 250px;
+        }
+
+        button {
+            position: absolute;
+            transform: translateY(-30px);
+            left: 50px;
+            outline: none;
+            border: none;
+            background: transparent;
+            font-size: 0.6em;
+            text-decoration: underline;
+            cursor: pointer;
+            color: var(--secondary-text-color);
+        }
+
+    }
+
+    // current weather (text)
+    .current-weather {
+
+        p {
+            position: relative;
+            font-size: 1.5rem;
+            padding-left: 20px;
+            transform: translate(6px, 85%);
+        }
+
+    }
+
+    // temperature (text)
+    .temperature {
+
+        p {
+            position: absolute;
+            font-size: 6rem;
+            transform: translateY(-90%);
+            padding-left: 20px;
+        }
+
+    }
+
+    // vertical line that divides the home page
+    .v1 {
+        width: 2px;
+        height: 500px;
+        position: absolute;
+        background-color: var(--text-color);
+        transform: translate(500px, -25%);
+    }
+
+    // weather info (text)
+    .info {
+        position: absolute;
+        font-size: 1.1rem;
+        transform: translate(525px, -70%);
+        
+        p {
+            color: var(--text-color);
+        }
+
+        .bold {
+            font-weight: 1000;
+            font-size: 1.3rem;
+        }
+
+    }
+
+    // fail notification
+    .notification-fail {
+        bottom: 50px;
+        transform: translateX(-270px);
+    }
+
+    // success notification
+    .notification-success {
+        bottom: 50px;
+        transform: translateX(-270px);
+    }
+
+}
+
+// sets left margin for nav circles
+.fp-slidesNav.fp-bottom {
+    margin-left: 1em !important;
+}
+
+// success notification (text)
+.notification-success {
+    position: absolute;
+    align-items: center;
+    width: 800px;
+    height: 20px;
+
+    p {
+        transform: translateY(-18px);
+        text-align: center;
+        text-decoration: underline;
+        text-decoration-color: green;
+    }
+
+}
+
+// fail notification (text)
+.notification-fail {
+    position: absolute;
+    align-items: center;
+    width: 800px;
+    height: 20px;
+
+    p {
+        transform: translateY(-18px);
+        text-align: center;
+        text-decoration: underline;
+        text-decoration-color: red;
+    }
+
+}
+
+// empty notification
+.notification-empty {
+    height: 0;
+    width: 0;
+    
+    p {
+        color: #ffffff00;
+    }
+
+}
+
+// all of the bookmarks
+.bookmarks_all {
+    display: flex;
+    transform: translate(15px, 15px);
+    height: 360px;
+    width: 770px;
+
+    // div for single bookmark (bookmark, delete button)
+    .bookmarkWhole {
+        height: 360px;
+        width: 80px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 15px;
+        
+        // bookmark (images, text)
+        .bookmark {
+            height: 300px;
+            width: 80px;
+            background-color: var(--secondary-bg-color);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px var(--shadow);
+            transition: all ease 0.5s;
+    
+            img {
+                height: 30px;
+                width: 30px;
+                transform: translate(5px, 10px);
+                filter: var(--filter);
+            }
+    
+            p {
+                font-weight: 1000;
+                color: var(--text-color);
+            }
+    
+            .weatherDescriptionBookmark {
+    
+                img {
+                    position: absolute;
+                    transform: translate(38px, -25px);
+                    filter: var(--filter);
+                }
+    
+            }
+
+            a.linkBookmark {
+                position: absolute;
+                transform: translate(-2px, -2px);
+
+                .buttonBookmark {
+                    position: absolute;
+                    height: 300px;
+                    width: 80px;
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                }
+    
+            }
+    
+        }
+    
+        .bookmark:hover {
+            background-color: var(--primary-color);
+    
+            p {
+                color: var(--text-bookmark-color-hover);
+            }
+    
+            img {
+                filter: var(--filter-bookmark);
+            }
+    
+        }
+
+        // delete button
+        a {
+            position: absolute;
+            height: 0;
+            width: 0;
+            transform: translate(28px, 8px);
+        
+            .delete {
+                height: 20px;
+                width: 20px;
+                align-items: center;
+                border: none;
+                outline: none;
+                background-color: transparent;
+                cursor: pointer;
+               
+                img {
+                    transform: translate(-2px, 0px);
+                    height: 15px;
+                    width: 15px;
+                    filter: var(--filter);
+                }
+    
+            }
+
+        }
+
+    }
+    
+
+}
+
+// vertical text
+.vertical-sentence{
+    -ms-writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    
+}
+
+// rotate characters to horizontal
+.rotate-characters-back-to-horizontal{ 
+    -webkit-text-orientation: upright;
+    text-orientation: upright;
+    transform: translate(-5.5px, 10px);
+}
+
+// temperature
+.temp {
+    position: absolute;
+    bottom: 0;
+    transform: translate(23px, -35px);
+}
+
+// match bookmark size for bookmark
+.bookmarkActualSize {
+    display: flex;
+    height: 300px;
+    width: 80px;
+    margin: 15px;
+    border-radius: 10px;
+}
+
+// add city overlay
+.addCity {
+    align-items: center;
+    height: 25px;
+
+    input {
+        width: 200px;
+        border: none;
+        outline: none;
+        background: none;
+        color: #FFFFFF;
+        font-size: 15px;
+    }
+
+    label {
+        position: absolute;
+        width: 200px;
+        height: 1px;
+        pointer-events: none;
+        border-bottom: 1px solid black;
+        bottom: 0;
+        background-color: #FFFFFF;
+    }
+
+    button {
+        border: none;
+        outline: none;
+        background: none;
+        color: #FFFFFF;
+        font-size: 15px;
+        transition: all ease 0.3s;
+        cursor: pointer;
+    }
+
+    button:hover {
+        color: var(--primary-color);
+    }
+
+}
+
+// add city bookmark button
+.addCityBookmark {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    bottom: 150px;
+
+    button {
+        position: absolute;
+        height: 80px;
+        width: 80px;
+        font-size: 100px;
+        line-height: 0;
+        font-family: 'Roboto', sans-serif;
+        align-items: center;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        transition: all ease 0.3s;
+        cursor: pointer;
+        color: var(--secondary-text-color);
+    }
+
+    button:hover {
+        color: var(--primary-color);
+    }
+
+}
+
+// select new city for home page overlay
+.overlay {  
+    height: 0;
+    width: 800px;
+    position: absolute;
+    top: 50px;
+    z-index: 30;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow: hidden;
+    transition: 0.5s; 
+}
+
+// overlay content
+.overlay-content {
+    z-index: 60;
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+// close overlay button
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+// close overlay button
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #FFFFFF;
+    display: block;
+    transition: 0.3s;
+}
+
+
+.overlay a:hover {
+    color: var(--primary-color);
+}
+
+// dropdown menu
+.dropdown {
+    height: 0;
+    width: 150px;
+    position: absolute;
+    top: 55px;
+    z-index: 70;
+    background-color: var(--secondary-bg-color);
+    overflow: hidden;
+    transition: 0.5s;
+    box-shadow: 1px 4px 3px var(--shadow-dropdown);
+}
+
+// dropdown content
+.dropdown-content {
+    position: absolute;
+    z-index: 80;
+
+    ul {
+        list-style-type: none;
+        left: 0;
+        transform: translate(-20px, -5px);
+
+        li {
+            padding: 5px;
+
+            a {
+                font-size: 20px;
+                text-decoration: none;
+                color: var(--text-color);
+                font-family: 'Roboto', sans-serif;
+                transition: all ease 0.3s;
+            }
+
+            a:hover {
+                color: var(--primary-color);
+            }
+
+        }
+        
+    }
+
+}
+
+// dropdown button
+.dropbtn {
+    transform: translate(20px, 15px);
+    z-index: 50;
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border: none;
+    outline: none;
+    align-items: center;
+    background: transparent;
+    cursor: pointer;
+    
+    img {
+        transform: translateX(-5px);
+        height: 25px;
+        width: 25px;
+        filter: var(--filter);
+        transform: rotate(0deg);
+        transition: transform 0.5s;
+    }
+    
+}
+
+// dropdown menu for user
+.user-dropdown {
+    height: 0;
+    width: 150px;
+    position: absolute;
+    right: 0;
+    top: 55px;
+    z-index: 70;
+    background-color: var(--secondary-bg-color);
+    overflow: hidden;
+    transition: 0.5s;
+    box-shadow: -1px 4px 3px var(--shadow-dropdown);
+}
+
+// dropdown content for user
+.dropdown-content {
+    position: absolute;
+    z-index: 80;
+
+    ul {
+        list-style-type: none;
+        left: 0;
+        transform: translate(-20px, -5px);
+
+        li {
+            padding: 5px;
+
+            a {
+                font-size: 20px;
+                text-decoration: none;
+                color: var(--text-color);
+                font-family: 'Roboto', sans-serif;
+                transition: all ease 0.3s;
+            }
+
+            a:hover {
+                color: var(--primary-color);
+            }
+
+        }
+        
+    }
+
+}
+
+// settings
+.settings {
+    display: flex;
+    height: 0;
+    width: 800px;
+    position: absolute;
+    z-index: 100;
+    background-color: var(--secondary-bg-color);
+    overflow: hidden;
+    transition: 0.5s;
+    justify-content: center;
+    align-items: center;
+
+    // save settings button
+    .saveSettings {
+        position: absolute;
+        bottom: 35px;
+
+        button {
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            align-items: center;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            transition: all ease 0.3s;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: var(--primary-color);
+        }
+
+    }
+
+    // close settings button
+    .closebtn {
+        position: absolute;
+        top: 20px;
+        right: 45px;
+        font-size: 60px;
+        color: var(--text-color);
+    }
+
+    // close settings button
+    a {
+        padding: 8px;
+        text-decoration: none;
+        font-size: 36px;
+        color: var(--secondary-bg-color);
+        display: block;
+        transition: 0.3s;
+        z-index: 150;
+    }
+
+    a:hover {
+        color: var(--primary-color);
+    }
+    
+    // settings content
+    .settings-content {
+        display: flex;
+        height: 25%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    
+        // toggle switch div
+        .toggle-switch {
+            position: relative;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 300px;
+            margin-left: 100px;
+            margin-right: 100px;
+    
+            // toggle switch
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+            
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            // 2nd toggle switch
+            .switch2 {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+              
+            .switch2 input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            
+            // toggle switch slider
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+            }
+              
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                transition: .4s;
+            }
+              
+            input:checked + .slider {
+                background-color: var(--toggle-color);
+            }
+              
+            input:focus + .slider {
+                box-shadow: 0 0 1px var(--toggle-color);
+            }
+              
+            input:checked + .slider:before {
+                transform: translateX(26px);
+            }
+              
+            .slider.round {
+                border-radius: 34px;
+            }
+              
+            .slider.round:before {
+                border-radius: 50%;
+            }
+    
+        }
+
+    }
+
+}
+
+// circle nav color
+.fp-slidesNav span {
+    background-color: var(--slide-circle) !important;
+}

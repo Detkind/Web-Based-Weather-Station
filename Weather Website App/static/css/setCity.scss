@@ -1,0 +1,97 @@
+// body
+body {
+    display: flex;
+    width: 800px;
+    height: 480px;
+    margin: unset;
+    justify-content: center;
+    align-items: center;
+}
+
+// set city (form)
+.setCity {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+
+    form {
+
+        input {
+            width: 295px;
+            border: none;
+            outline: none;
+            background: none;
+            color: #707070;
+            font-size: 25px;
+            font-family: 'Roboto', sans-serif;
+            transform: translateX(5px);
+        }
+    
+        label {
+            position: absolute;
+            width: 300px;
+            height: 0.5px;
+            pointer-events: none;
+            border-bottom: 0.5px solid #707070;
+            background-color: #707070;
+            transform: translateY(35px);
+            font-family: 'Roboto', sans-serif;
+        }
+    
+        button {
+            border: none;
+            outline: none;
+            background: none;
+            color: black;
+            font-size: 25px;
+            transition: all ease 0.3s;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            color: #CD735F;
+        }
+
+    }
+
+}
+
+// font for text
+.text {
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    top: 15px;
+    font-size: 25px;
+}
+
+// fail notification (text)
+.notification-fail {
+    position: absolute;
+    align-items: center;
+    width: 800px;
+    height: 20px;
+
+    p {
+        transform: translateY(200px);
+        text-align: center;
+        text-decoration: underline;
+        text-decoration-color: red;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+    }
+
+}
+
+// empty notification (text)
+.notification-empty {
+    height: 0;
+    width: 0;
+    
+    p {
+        color: #ffffff00;
+    }
+
+}

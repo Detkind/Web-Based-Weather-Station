@@ -1,0 +1,111 @@
+// body
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+// fail notification (text)
+.notification-fail {
+    position: absolute;
+    align-items: center;
+    width: 800px;
+    height: 20px;
+    transform: translateY(25px);
+
+    p {
+        text-align: center;
+        text-decoration: underline;
+        text-decoration-color: red;
+    }
+
+}
+
+// fail notification for signup page (text)
+.notification-fail-signup {
+    position: absolute;
+    align-items: center;
+    width: 800px;
+    height: 20px;
+    transform: translateY(5px);
+
+    p {
+        text-align: center;
+        text-decoration: underline;
+        text-decoration-color: red;
+    }
+
+}
+
+// empty notification (text)
+.notification-empty {
+    height: 0;
+    width: 0;
+    
+    p {
+        color: #ffffff00;
+    }
+
+}
+
+// not a member (text, link)
+.not-a-member {
+    position: absolute;
+    align-items: center;
+    width: 800px;
+    height: 20px;
+
+    p {
+        text-align: center;
+    }
+
+}
+
+.back-to-login {
+    position: absolute;
+
+    .back-to-login-button {
+        position: absolute;
+        text-decoration: none;
+    }
+
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.css" integrity="sha256-+dIh4jG2jQTHZwW81yUo8h6tzXWcNumyNL5XPZbwp1E=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main1.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+</head>
+<body onload="update_values();">
+
+    <!-- settings -->
+    <div class="settings" id="settingsID">
+        <!-- close settings button -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeSettings()">&times;</a>
+        <!-- settings content -->
+        <div class="settings-content">
+            <!-- toggle switch light mode vs dark mode -->
+            <div class="toggle-switch">
+                <p class="mode">Light Mode</p>
+                <label class="switch" for="checkbox">
+                    <input type="checkbox" id="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <p class="mode">Dark Mode</p>
+            </div>
+            <!-- toggle switch Fahrenheit vs Celcius -->
+            <div class="toggle-switch">
+                <p class="mode">Imperial</p>
+                <label class="switch2">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <p class="mode">Metric&nbsp;&nbsp;</p>
+            </div>
+        </div>
+        <!-- save settings button -->
+        <div class="saveSettings">
+            <form method="POST" action="{{ url_for('saveSettings') }}">
+                <button>Save Settings</button>
+            </form>
+        </div>
+    </div>
+    
+    <header>
+        <!-- placeholder div for correct spacing -->
+        <div></div>
+        <!-- username, dropdown button, and logo -->
+        <div class="user">
+            <a href="#" class="logo">{{ name }}</a>
+            <button onclick="openUserMenu()" class="userDropbtn">
+                <img src="{{ url_for('static', filename='icons/arrow.png') }}" id="userArrow" class="dropdownButtonUser">
+            </button>
+            <img src="{{ url_for('static', filename='icons/user.png') }}">
+        </div>
+    </header>
+
+    <!-- menu (for navigation) -->
+    <button onclick="openMenu()" class="dropbtn">
+        <img src="{{ url_for('static', filename='icons/menu.png') }}" class="dropdownButton" id="dropdownButton">
+    </button>
+
+    <!-- dropdown content (for navigation) -->
+    <div id="myDropdown" class="dropdown">
+        <div class="dropdown-content">
+            <ul>
+                <li><a href="#section1">Home</a></li>
+                <li><a href="#section1/slide1-2">Bookmarks</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- user dropdown content -->
+    <div id="userDropdown" class="user-dropdown">
+        <div class="dropdown-content">
+            <ul>
+                <li><a href="#" onclick="openSettings()">Settings</a></li>
+                <li><a href="{{ url_for('logout') }}">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- fullpage -->
+    <div id="fullPage" class="transition-fade">
+        <!-- fullpage section -->
+        <div class="section s1">
+            <!-- home slide/page -->
+            <div class="slide f1">
+                <!-- vertical line -->
+                <div class="v1"></div>
+                <!-- location -->
+                <div class="location">
+                    <img src="{{ url_for('static', filename='icons/marker.png') }}">
+                    <p id="weather-city">?
+                        <script>document.getElementById("weather-city").innerHTML;</script>
+                    </p>
+                    <button onclick="openNavHome()">change</button>
+                </div>
+                <!-- change city overlay -->
+                <div id="myNavHome" class="overlay">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNavHome()">&times;</a>
+                    <div class="overlay-content">
+                        <form class="addCity" action="{{ url_for('searching') }}" method="POST">
+                            <label></label>
+                            <input type="text" name="city_search" autocomplete="off" placeholder="City name" required oninvalid="this.setCustomValidity('Please provide city name.')" oninput="this.setCustomValidity('')"/>
+                            <button>Select City</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- current weather description -->
+                <div class="current-weather">
+                    <p id="weather-description">?
+                        <script>document.getElementById("weather-description").innerHTML;</script>
+                    </p>
+                </div>
+                <!-- current temperature -->
+                <div class="temperature">
+                    <p id="weather-temperature">?
+                        <script>document.getElementById("weather-temperature").innerHTML;</script>
+                    </p>
+                </div>
+                <!-- weather info -->
+                <div class="info">
+                    <p class="bold">Perceived Temperature</p>
+                    <p id="perceived-temp">?
+                        <script>document.getElementById("perceived-temp").innerHTML;</script>
+                    </p>
+                    <p class="bold">Humidity</p>
+                    <p id="humidity">?
+                        <script>document.getElementById("humidity").innerHTML;</script>
+                    </p>
+                    <p class="bold">Wind Speed</p>
+                    <p id="wind-speed">?
+                        <script>document.getElementById("wind-speed").innerHTML;</script>
+                    </p>
+                    <p class="bold">Pressure</p>
+                    <p id="pressure">?
+                        <script>document.getElementById("pressure").innerHTML;</script>
+                    </p>
+                </div>
+                <!-- flashed message -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category == 'errorHome' %}
+                            {% set message_class = 'notification-fail' %}
+                        {% elif category == 'successHome' %}
+                            {% set message_class = 'notification-success' %}
+                        {% else %}
+                            {% set message_class = 'notification-empty' %}
+                        {% endif %}
+                        <div class="{{ message_class }}"><p>{{ message }}</p></div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <!-- weather bookmarks slide -->
+            <div class="slide f2" data-anchor="slide1-2">
+                <!-- bookmarks -->
+                <div class="bookmarks_all">
+                    {% for weather, i in weatherDataBookmarks|zip(range(length)) %}
+                    <div class="bookmarkWhole">
+
+                        <div id="bookmarkID" class="bookmark">
+                            <a href="{{ url_for('displayBookmarkCityHome', name=weather.city) }}" class="linkBookmark">
+                                <button class="buttonBookmark"></button>
+                            </a>
+                            <img src="{{ url_for('static', filename='icons/marker.png') }}">
+                            {% set weatherID = 'weatherDescription{}'.format(i) %}
+                            <div id="{{ weatherID }}" class="weatherDescriptionBookmark">?</div>
+                            <div class="vertical-sentence">
+                                {% set cityID = 'city{}'.format(i) %}
+                                <p class="rotate-characters-back-to-horizontal" id="{{ cityID }}">?</p>
+                            </div>
+                            {% set temperatureID = 'temperature{}'.format(i) %}
+                            <p class="temp" id="{{ temperatureID }}">?</p>
+                        </div>
+
+                        <a href="{{ url_for('delete_city', name=weather.city) }}">
+                            <button class="delete"><img src="{{ url_for('static', filename='icons/delete.png') }}"></button>
+                        </a>
+                        
+                    </div>
+                    {% endfor %}
+
+                    <div class="bookmarkActualSize">
+                        <div class="addCityBookmark">
+                            <button onclick="openNav()">+</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- add bookmark overlay -->
+                <div id="myNav" class="overlay">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <div class="overlay-content">
+                        <form class="addCity" method="POST">
+                            <label></label>
+                            <input type="text" name="city" autocomplete="off" placeholder="City name" required oninvalid="this.setCustomValidity('Please provide city name.')" oninput="this.setCustomValidity('')"/>
+                            <button>Add City</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- flashed messages -->
+                {% with message = get_flashed_messages(with_categories=true) %}
+                {% if message %}
+                    {% for category, message in message %}
+                        {% if category == 'error' %}
+                            {% set message_class = 'notification-fail' %}
+                        {% elif category == 'success' %}
+                            {% set message_class = 'notification-success' %}
+                        {% else %}
+                            {% set message_class = 'notification-empty' %}
+                        {% endif %}
+                        <div class="{{ message_class }}"><p>{{ message }}</p></div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+    <!-- fullpage source -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.js" integrity="sha256-caNcSA0LvOCX90PTuEbwl+V09xPMca13CJUasl+VCtk=" crossorigin="anonymous"></script>
+    <!-- fullpage script -->
+    <script>
+        new fullpage('#fullPage', {
+            autoScrolling: true,
+            navigation: false,
+            anchors: ['section1'],
+            showActiveTooltip: false,
+            scrollingSpeed: 600,
+            controlArrows: false,
+            slidesNavigation: true
+        })
+    </script>
+    <!-- jquery source -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <!-- script root -->
+    <script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+    <!-- string format function for jquery -->
+    <script>
+        String.prototype.format = String.prototype.f = function() {
+            var s = this,
+                i = arguments.length;
+
+            while (i--) {
+                s = s.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
+            }
+            return s;
+        };
+    </script>
+    <!-- open/close overlays -->
+    <script>
+        function openNav() {
+            document.getElementById("myNav").style.height = "430px";
+        }
+
+        function closeNav() {
+            document.getElementById("myNav").style.height = "0%";
+        }
+
+        function openNavHome() {
+            document.getElementById("myNavHome").style.height = "430px";
+        }
+
+        function closeNavHome() {
+            document.getElementById("myNavHome").style.height = "0%";
+        }
+
+        function openMenu() {
+            document.getElementById("myDropdown").style.height = "100px";
+            document.getElementById("dropdownButton").style.transform = "rotate(180deg)";
+        }
+
+        function openUserMenu() {
+            document.getElementById("userDropdown").style.height = "100px";
+            document.getElementById("userArrow").style.transform = "rotate(-180deg)";
+        }
+
+        function openSettings() {
+            document.getElementById("settingsID").style.height = "480px";
+        }
+        
+        function closeSettings() {
+            document.getElementById("settingsID").style.height = "0%";
+        }
+    </script>
+    <!-- close certain dropdown menus when clicked outside of the dropdown windows -->
+    <script>
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdownButton')) {
+                if (document.getElementById("myDropdown").style.height == "100px") {
+                    document.getElementById("myDropdown").style.height = "0px";
+                    document.getElementById("dropdownButton").style.transform = "rotate(0deg)";
+                }
+            }
+
+            if (!event.target.matches('.dropdownButtonUser')) {
+                if (document.getElementById("userDropdown").style.height == "100px") {
+                    document.getElementById("userDropdown").style.height = "0px";
+                    document.getElementById("userArrow").style.transform = "rotate(0deg)";
+                }
+            }
+        }
+    </script>
+    <!-- fade flashed messages out after a certain time -->
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.notification-success').fadeOut('slow');
+            }, 10000);
+        });
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.notification-fail').fadeOut('slow');
+            }, 10000);
+        });
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.notification-empty').fadeOut('slow');
+            }, 1000);
+        });
+    </script>
+    <!-- sets theme based on toggle (saved to browser session local storage) -->
+    <script>
+        const toggleSwitch = document.querySelector('.switch input[type="checkbox"]');
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }    
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+    </script>
+    <!-- gets theme from local storage and sets it -->
+    <script>
+        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+    </script>
+    <!-- sets units based on toggle (saved to browser session local storage) -->
+    <script>
+        const toggleSwitch2 = document.querySelector('.switch2 input[type="checkbox"]');
+
+        function switchThemeUnits(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-units', 'metric');
+                localStorage.setItem('units', 'metric');
+            }
+            else {
+                document.documentElement.setAttribute('data-units', 'light');
+                localStorage.setItem('units', 'imperial');
+            }    
+        }
+
+        toggleSwitch2.addEventListener('change', switchThemeUnits, false);
+    </script>
+    <!-- gets units from local storage and sets it -->
+    <script>
+        const currentUnits = localStorage.getItem('units') ? localStorage.getItem('units') : null;
+
+        if (currentUnits) {
+            document.documentElement.setAttribute('data-units', currentUnits);
+
+            if (currentUnits === 'metric') {
+                toggleSwitch2.checked = true;
+            }
+        }
+    </script>
+    <!-- dynamically updates weather information using jquery (units based on toggle) -->
+    <script>
+        // image tags for weather types
+        var sun = "<img src='{{ url_for('static', filename='icons/Sun.gif') }}'>"
+        var clouds = "<img src='{{ url_for('static', filename='icons/Clouds.gif') }}'>"
+        var rain = "<img src='{{ url_for('static', filename='icons/Rain.gif') }}'>"
+        var drizzle = "<img src='{{ url_for('static', filename='icons/Drizzle.gif') }}'>"
+        var thunderstorm = "<img src='{{ url_for('static', filename='icons/Stormy.gif') }}'>"
+        var snow = "<img src='{{ url_for('static', filename='icons/Snow.gif') }}'>"
+        var mist = "<img src='{{ url_for('static', filename='icons/Foggy.gif') }}'>"
+
+        // updates weather data every 15 seconds
+        var intervalID = setInterval(update_values,15000);
+        
+        function update_values() {
+            // metric
+            if (toggleSwitch2.checked) {
+                $.getJSON($SCRIPT_ROOT + '/updateMetric',
+            
+                function(data) {
+                    // updates home page weather data
+                    $('#weather-city').text(data.weatherHome['city']);
+                    $('#weather-description').text(data.weatherHome['description']);
+                    $('#weather-temperature').text(data.weatherHome['temperature'] + "°C");
+                    $('#perceived-temp').text(data.weatherHome['perceived_temp'] + "°C");
+                    $('#humidity').text(data.weatherHome['humidity'] + "%");
+                    $('#wind-speed').text(data.weatherHome['wind_speed'] + " kph");
+                    $('#pressure').text(data.weatherHome['pressure'] + " hPa");
+
+                    // updates bookmark weather data
+                    for (i = 0; i < data.weatherDataBookmarks.length; i++) {
+
+                        $('#city{0}'.f(i)).text(data.weatherDataBookmarks[i]['city']);
+                        $('#temperature{0}'.f(i)).text(data.weatherDataBookmarks[i]['temperature'] + "°C");
+
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Clear') {
+                        $('#weatherDescription{0}'.f(i)).html(sun);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Clouds') {
+                            $('#weatherDescription{0}'.f(i)).html(clouds);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Rain') {
+                            $('#weatherDescription{0}'.f(i)).html(rain);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Drizzle') {
+                            $('#weatherDescription{0}'.f(i)).html(drizzle);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Thunderstorm') {
+                            $('#weatherDescription{0}'.f(i)).html(thunderstorm);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Snow') {
+                            $('#weatherDescription{0}'.f(i)).html(snow);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Mist') {
+                            $('#weatherDescription{0}'.f(i)).html(mist);
+                        }
+                    }
+                }); 
+            }
+
+            // imperial
+            else if (!toggleSwitch2.checked) {
+                $.getJSON($SCRIPT_ROOT + '/update',
+            
+                function(data) {
+                    // updates home page weather data
+                    $('#weather-city').text(data.weatherHome['city']);
+                    $('#weather-description').text(data.weatherHome['description']);
+                    $('#weather-temperature').text(data.weatherHome['temperature'] + "°F");
+                    $('#perceived-temp').text(data.weatherHome['perceived_temp'] + "°F");
+                    $('#humidity').text(data.weatherHome['humidity'] + "%");
+                    $('#wind-speed').text(data.weatherHome['wind_speed'] + " mph");
+                    $('#pressure').text(data.weatherHome['pressure'] + " hPa");
+
+                    // updates bookmark weather data
+                    for (i = 0; i < data.weatherDataBookmarks.length; i++) {
+
+                        $('#city{0}'.f(i)).text(data.weatherDataBookmarks[i]['city']);
+                        $('#temperature{0}'.f(i)).text(data.weatherDataBookmarks[i]['temperature'] + "°F");
+
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Clear') {
+                        $('#weatherDescription{0}'.f(i)).html(sun);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Clouds') {
+                            $('#weatherDescription{0}'.f(i)).html(clouds);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Rain') {
+                            $('#weatherDescription{0}'.f(i)).html(rain);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Drizzle') {
+                            $('#weatherDescription{0}'.f(i)).html(drizzle);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Thunderstorm') {
+                            $('#weatherDescription{0}'.f(i)).html(thunderstorm);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Snow') {
+                            $('#weatherDescription{0}'.f(i)).html(snow);
+                        }
+                        if (data.weatherDataBookmarks[i]['groupDescription'] == 'Mist') {
+                            $('#weatherDescription{0}'.f(i)).html(mist);
+                        }
+                    }
+                });                
+            }
+        };
+    </script>
+
+</body>
+</html>

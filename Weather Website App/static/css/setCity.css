@@ -1,0 +1,103 @@
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 800px;
+  height: 480px;
+  margin: unset;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.setCity {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.setCity form input {
+  width: 295px;
+  border: none;
+  outline: none;
+  background: none;
+  color: #707070;
+  font-size: 25px;
+  font-family: 'Roboto', sans-serif;
+  -webkit-transform: translateX(5px);
+          transform: translateX(5px);
+}
+
+.setCity form label {
+  position: absolute;
+  width: 300px;
+  height: 0.5px;
+  pointer-events: none;
+  border-bottom: 0.5px solid #707070;
+  background-color: #707070;
+  -webkit-transform: translateY(35px);
+          transform: translateY(35px);
+  font-family: 'Roboto', sans-serif;
+}
+
+.setCity form button {
+  border: none;
+  outline: none;
+  background: none;
+  color: black;
+  font-size: 25px;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+}
+
+.setCity form button:hover {
+  color: #CD735F;
+}
+
+.text {
+  position: absolute;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  top: 15px;
+  font-size: 25px;
+}
+
+.notification-fail {
+  position: absolute;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 800px;
+  height: 20px;
+}
+
+.notification-fail p {
+  -webkit-transform: translateY(200px);
+          transform: translateY(200px);
+  text-align: center;
+  text-decoration: underline;
+  -webkit-text-decoration-color: red;
+          text-decoration-color: red;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+}
+
+.notification-empty {
+  height: 0;
+  width: 0;
+}
+
+.notification-empty p {
+  color: #ffffff00;
+}
+/*# sourceMappingURL=setCity.css.map */

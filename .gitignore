@@ -1,0 +1,6 @@
+/__pycache__
+*.pyc
+README.md
+/venv
+.vscode
+.env
